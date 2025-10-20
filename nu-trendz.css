@@ -1,0 +1,300 @@
+/* ========== BASIC RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== BODY ========== */
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  line-height: 1.6;
+  background: #f5f5f5;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: sticky;   /* ✅ Keeps it visible on scroll */
+  top: 20px;          /* space from top for floating look */
+  width: 85%;
+  margin: 40px auto;
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: background-color 0.3s;
+  z-index: 20;
+}
+
+/* Logo Text */
+.logotwo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Nav Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ff9800;
+}
+
+/* Hamburger Icon */
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Hide checkbox input */
+#menu-toggle {
+  display: none;
+}
+
+/* ========== RESPONSIVE NAVBAR ========== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    background-color: #333;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+
+  #menu-toggle:checked + .menu-icon + .nav-links {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+}
+
+/* ========== BANNER CONTENT ========== */
+#banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), #64420f73), url(IMAGES/hair-wash.jpg);
+
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    text-align: center;
+}
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+/* ========== BUTTON STYLING ========== */
+button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button span {
+  position: absolute;
+  background: white;
+  height: 100%;
+  width: 0;
+  left: 0;
+  top: 0;
+  border-radius: 30px;
+  transition: 0.4s;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+button:hover span {
+  width: 100%;
+}
+
+button:hover {
+  color: #333;
+  background: #ffb84d;
+  box-shadow: 0 0 15px #ff9800;
+}
+
+
+
+
+
+/* ==================== FP CONTENT ==================== */
+.fp_content {
+  max-width: 700px;             /* Keeps content readable */
+  margin: 50px auto;            /* Center horizontally with some spacing */
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-family: 'Montserrat', sans-serif;  /* Modern clean font */
+}
+
+/* Main Heading */
+.fp_content h1 {
+  font-size: 3rem;               /* Large, attention-grabbing */
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7); /* Adds depth */
+}
+
+/* Subheading */
+.fp_content h2 {
+  font-size: 2rem;               /* Slightly smaller than h1 */
+  font-weight: 600;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  color: #ffb84d;                /* Accent color for pop */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Paragraph */
+.fp_content p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #ffffffcc;              /* Slightly transparent for elegance */
+  margin-bottom: 25px;
+}
+
+/* Button */
+.fp_content button {
+  position: relative;
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.fp_content button span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: white;
+  border-radius: 30px;
+  opacity: 0.2;
+  transition: width 0.4s ease;
+  z-index: 0;
+}
+
+.fp_content button:hover span {
+  width: 100%;
+}
+
+.fp_content button:hover {
+  color: #333;
+  background: #ffb84d;
+  box-shadow: 0 0 15px #ff9800;
+  transform: scale(1.05);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .fp_content h1 {
+    font-size: 2.5rem;
+  }
+  .fp_content h2 {
+    font-size: 1.75rem;
+  }
+  .fp_content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fp_content h1 {
+    font-size: 2rem;
+  }
+  .fp_content h2 {
+    font-size: 1.5rem;
+  }
+  .fp_content p {
+    font-size: 0.95rem;
+  }
+}
+
+
+
+
+
+
+/*--SERVICES SECTION--*/
+#Services {
+    width: 100%;
+    padding: 70px 0;
+    
+}
+.title-text {
+    text-align: center;
+    margin-bottom: 70px;
+}
+.title-text p {
+    margin : auto;
+    font-size: 20px;
+    color: #ff9800;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+.title-text p::after {
+    content: '';
+    width: 50px;
+    height: 35px;
+    background: linear-gradient(90deg, #ff9800, #ffb84d);
+    position: absolute;
+    left: -20px;
+    right: 0;
+    z-index: -1;
+    transform: rotate(10deg);
+    border-top-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+.title-text h1 {
+    font-size: 50px;
+}
