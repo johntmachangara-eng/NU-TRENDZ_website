@@ -104,7 +104,7 @@ body {
 
 /* ==================== BANNER ==================== */
 #banner {
-  background: linear-gradient(rgba(0,0,0,0.5), #64420f73), url(IMAGES/hairwash.jpeg) center/cover no-repeat fixed;
+  background: linear-gradient(rgba(0,0,0,0.5), #64420f73), url(IMAGES/hairwash.png) center/cover no-repeat fixed;
   min-height: 100vh; /* Changed to min-height */
   text-align: center;
   padding-top: 80px; /* Offset for fixed navbar */
