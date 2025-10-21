@@ -410,9 +410,10 @@ body {
   left: 50%;
   opacity: 0;
   transform: translateX(-50%);
-  transition : 1s;
-  
+  transition: all 1 ease;
 }
+
+
 .hr{
   background: #fff;
   height: 2px;
@@ -465,7 +466,7 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: all 1s ease;
   border-radius: 7px;
 }
 
@@ -480,26 +481,32 @@ body {
 
 
 
-@media (max-width: 992px) {
+@media screen and (max-width: 768px) {
   .single-service {
     flex: 1 1 calc(50% - 20px);
+    margin-bottom: 30px;
+  }
+  .service-desc p {
+    font-size: 12px;
+  }
+  .hr{
+    margin: 5px auto;
+  }
+  .single-service:hover .portfolio-desc{
+    bottom: 20% !important;
   }
 }
-
-@media (max-width: 600px) {
+@media screen and (max-width: 576px) {
   .single-service {
-    flex: 1 1 calc(50% - 10px);
+    flex: 1 1 100%;
+    margin-bottom: 20px;
   }
-
+  .portfolio-desc {
+    bottom: 20%;
+    font-size: 14px;
+  }
   .portfolio-box {
     gap: 15px;
   }
-
-  .overlay p {
-    font-size: 1rem;
-  }
-
-  .portfolio-desc {
-    font-size: 0.9rem;
-  }
 }
+
