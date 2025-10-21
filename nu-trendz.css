@@ -411,6 +411,7 @@ body {
   opacity: 0;
   transform: translateX(-50%);
   transition : 1s;
+  
 }
 .hr{
   background: #fff;
@@ -418,7 +419,12 @@ body {
   border: 0;
   width: 15px auto;
   width: 60%;
+  margin: 0 0 10px 0; 
 }
+.portfolio-desc h3 {
+  margin: 0 0 10px 0;
+}
+
 .img-container {
   position: relative;
   width: 100%;
@@ -428,6 +434,8 @@ body {
 }
 .service-desc p {
   font-size: 14px;
+  margin: 0;
+  line-height: 1.5; 
 }
 .single-service:hover .portfolio-desc{
   bottom: 40%;
