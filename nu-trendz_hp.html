@@ -5,201 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nu-Trendz Home Page</title>
 
-  <!-- Link to external stylesheet -->
-   <link rel="stylesheet" href="nu-trendz.js">
+  <!-- ===== Firebase SDKs ===== -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // ===== Firebase configuration =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyAmwRchhl7UDo3TcNZJmGUtWCguhgvcmrI",
+      authDomain: "nu-trendz-8f560.firebaseapp.com",
+      databaseURL: "https://nu-trendz-8f560-default-rtdb.firebaseio.com",
+      projectId: "nu-trendz-8f560",
+      storageBucket: "nu-trendz-8f560.appspot.com",
+      messagingSenderId: "206750888989",
+      appId: "1:206750888989:web:83f40b0067649abc83c2f4"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    // Make database available globally
+    const db = firebase.database();
+  </script>
+
+  <!-- ===== Stylesheets ===== -->
   <link rel="stylesheet" href="nu-trendz.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<!-- ========== BANNER SECTION ========== -->
-<section id="banner">
+  <!-- ========== BANNER SECTION ========== -->
+  <section id="banner">
+    <nav class="navbar">
+      <h1 class="logotwo">NU-TRENDZ</h1>
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <ul class="nav-links">
+        <li><a href="#banner">Home</a></li>
+        <li><a href="#Services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
 
-  <!-- ✅ Sticky Navbar -->
-  <nav class="navbar">
-    <h1 class="logotwo">NU-TRENDZ</h1>
-
-    <!-- Hamburger icon -->
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Portfolio</a></li>
-      <li><a href="#">Testimonial</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- ✅ Banner Content -->
-  <div class="content">
-    <img src="IMAGES/logo.png" alt="Nu-Trendz Logo" class="logo" loading="lazy">
-    <div class="fp_content">
-      <h1>DISCOVER YOUR BEST SELF AT</h1>
-      <h2>NU-TRENDZ</h2>
-      <p>Expert cuts, colour & beauty treatments in the heart of Colchester</p>
-      <button type="button" aria-label="Book an appointment"><span></span>BOOK NOW</button>
+    <div class="content">
+      <img src="IMAGES/logo.png" alt="Nu-Trendz Logo" class="logo" loading="lazy">
+      <div class="fp_content">
+        <h1>DISCOVER YOUR BEST SELF AT</h1>
+        <h2>NU-TRENDZ</h2>
+        <p>Expert cuts, colour & beauty treatments in the heart of Colchester</p>
+        <button type="button"><span></span>BOOK NOW</button>
+      </div>
     </div>
+  </section>
+
+  <!-- ========== SERVICES SECTION ========== -->
+  <section id="Services">
+    <div class="title-text">
+      <p>OUR EXPERTISE</p>
+      <h1>Why Choose Us</h1>
+    </div>
+
+    <div class="service_box">
+      <div class="services">
+        <h1>Experienced Staff</h1>
+        <div class="service-desc">
+          <div class="service-icon"><i class="fa fa-shield"></i></div>
+          <div class="service-text">
+            <p>Experienced in all aspects of hair and beauty. We love creating styles that make you feel amazing — from everyday looks to special occasions.</p>
+          </div>
+        </div>
+
+        <h1>Pre Booking Online</h1>
+        <div class="service-desc">
+          <div class="service-icon"><i class="fa fa-check-square"></i></div>
+          <div class="service-text">
+            <p>Easily pre-book your appointments online. Choose your stylist and preferred time — quick and convenient.</p>
+          </div>
+        </div>
+
+        <h1>Affordable Cost</h1>
+        <div class="service-desc">
+          <div class="service-icon"><i class="fa fa-gbp"></i></div>
+          <div class="service-text">
+            <p>Get high-quality services at prices that won't break the bank. Style, beauty, and value all in one place.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="services_img">
+        <img src="IMAGES/servises1.jpeg" alt="Service Image">
+      </div>
+    </div>
+  </section>
+<!-- ========== TESTIMONIALS / REVIEW SECTION ========== -->
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <h2 class="section-title">What Our Clients Say</h2>
+
+    <!-- Review Form -->
+    <form id="testimonialForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <textarea id="message" placeholder="Your Review" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Toggle Reviews Button -->
+    <button id="toggleReviews" class="toggle-btn">Show Reviews</button>
+
+    <!-- Display Reviews -->
+    <div id="testimonialCards" class="testimonial-cards hidden"></div>
   </div>
 </section>
 
-<!-- ========== SERVICES SECTION ========== -->
-<section id="Services">
-  <div class="title-text">
-    <p>OUR EXPERTISE</p>
-    <h1>Why Choose Us</h1>
-  </div>
-
-  <div class="service_box">
-    <div class="services">
-
-      <!-- Experienced Staff -->
-      <h1>Experienced Staff</h1>
-      <div class="service-desc">
-        <div class="service-icon">
-          <i class="fa fa-shield" aria-hidden="true"></i>
-        </div>
-        <div class="service-text">
-          <p>
-            Experienced in all aspects of hair and beauty.
-            We love creating styles that make you feel
-            amazing — from everyday looks to special occasions.
-          </p>
-        </div>
-      </div>
-
-      <!-- Pre Booking Online -->
-      <h1>Pre Booking Online</h1>
-      <div class="service-desc">
-        <div class="service-icon">
-          <i class="fa fa-check-square" aria-hidden="true"></i>
-        </div>
-        <div class="service-text">
-          <p>
-            Easily pre-book your appointments online.
-            Choose your stylist and preferred time — quick and convenient.
-          </p>
-        </div>
-      </div>
-
-      <!-- Affordable Cost -->
-      <h1>Affordable Cost</h1>
-      <div class="service-desc">
-        <div class="service-icon">
-          <i class="fa fa-gbp" aria-hidden="true"></i>
-        </div>
-        <div class="service-text">
-          <p>
-            Get high-quality services at prices that won't break the bank.
-            Style, beauty, and value all in one place.
-          </p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="services_img">
-      <img src="IMAGES/servises1.jpeg" alt="Service Image">
-    </div>
-  </div>
-</section>
-
-
-
-
-
-<!--============ PORTFOLIO ==========-->
-
-<section id="portfolio">
-  <div class="title-text">
-    <p>Our Work</p>
-    <h1>Magical Transformations</h1>
-  </div>
-<section id="portfolio">
-  <h2 class="section-title">Our Hair Styles</h2>
-  <div class="portfolio-box">
-
-    <div class="single-service">
-      <div class="img-container">
-        <img src="IMAGES/hair-1.jpeg" alt="Hair Style 1">
-        <div class="overlay"></div>
-      </div>
-      <div class ="portfolio-desc">
-      <h3>Elegant Curls</h3>
-      <hr>
-      <p class=>Soft, flowing curls that bring out a natural elegance — perfect for parties or a night out.</p>
-      </div>
-    </div>
-
-    <div class="single-service">
-      <div class="img-container">
-        <img src="IMAGES/hair-2.jpeg" alt="Hair Style 2">
-        <div class="overlay"></div>
-      </div>
-      <div class ="portfolio-desc">
-      <h3>Sleek Straight</h3>
-      <hr>
-      <p>Smooth and shiny straight hair for a clean, confident, and timeless look.</p>
-      </div>
-    </div>
-
-    <div class="single-service">
-      <div class="img-container">
-        <img src="IMAGES/hair-3.jpeg" alt="Hair Style 3">
-        <div class="overlay"></div>
-      </div>
-      <div class ="portfolio-desc">
-      <h3>Classic Braids</h3>
-      <hr>
-      <p>Beautifully woven braids that mix tradition and trend — perfect for any occasion.</p>
-      </div>
-    </div>
-
-    <div class="single-service">
-      <div class="img-container">
-        <img src="IMAGES/hair-4.jpeg" alt="Hair Style 4">
-        <div class="overlay"></div>
-      </div>
-      <div class ="portfolio-desc">
-      <h3>Wavy Layers</h3>
-      <hr>
-      <p>Bouncy layers with gentle waves that add volume and a carefree summer vibe.</p>
-      </div>
-    </div>
-
-    <div class="single-service">
-      <div class="img-container">
-        <img src="IMAGES/hair-5.jpeg" alt="Hair Style 5">
-        <div class="overlay"></div>
-      </div>
-      <div class ="portfolio-desc">
-      <h3>Chic Bun</h3>
-      <hr>
-      <p>A neat, stylish bun that blends grace and simplicity — ideal for formal events or daily wear.</p>
-      </div>
-    </div>
-
-    <div class="single-service">
-      <div class="img-container">
-        <img src="IMAGES/hair-6.jpeg" alt="Hair Style 6">
-        <div class="overlay"></div>
-      </div>
-      <div class ="portfolio-desc">
-      <h3>Natural Waves</h3>
-      <hr>
-      <p>Soft, natural waves that give off effortless beauty and confidence with every step.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
+  <!-- ===== External JS ===== -->
+  <script src="nu-trendz.js"></script>
 </body>
 </html>
