@@ -1,3 +1,9 @@
+/* === Fix for navbar covering content & smooth scroll === */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* Adjust this to your navbar height */
+}
+
 /* ========== BASIC RESET ========== */
 * {
   margin: 0;
@@ -100,8 +106,9 @@ body {
   background: linear-gradient(rgba(0,0,0,0.5), #64420f73), url(IMAGES/hairwash.png) center/cover no-repeat fixed;
   min-height: 100vh;
   text-align: center;
-  padding-top: 80px;
+  padding-top: 120px;
 }
+
 
 .logo {
   width: 120px;
@@ -420,4 +427,279 @@ form button:hover {
   justify-content: center;
   gap: 30px;
   animation: fadeIn 0.6s ease forwards;
+}
+
+
+
+
+
+
+
+
+
+
+/* ==================== CONTACT SECTION ==================== */
+.contact-section {
+  padding: 80px 20px;
+  background: #faf7f2;
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-subtitle {
+  color: #555;
+  margin-bottom: 50px;
+  font-size: 1.1rem;
+}
+
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* ===== FORM ===== */
+.contact-form {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-form textarea {
+  height: 120px;
+  resize: none;
+}
+
+.contact-form button {
+  padding: 12px 25px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
+  background-color: #e68900;
+  transform: translateY(-2px);
+}
+
+/* ===== CONTACT INFO ===== */
+.contact-info {
+  flex: 1 1 40%;
+  text-align: left;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.contact-info h3 {
+  color: #d6336c;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.contact-info i {
+  color: #ff9800;
+  margin-right: 10px;
+}
+
+/* ===== SOCIAL LINKS ===== */
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+  color: #d6336c;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #ff9800;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 992px) {
+  .contact-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-form,
+  .contact-info {
+    width: 90%;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-section {
+    padding: 60px 15px;
+  }
+
+  .contact-info h3 {
+    text-align: center;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* ==================== BOOKING OVERLAY ==================== */
+.booking-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.booking-modal {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease;
+  position: relative;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  color: #d6336c;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #ff9800;
+}
+
+.booking-modal h2 {
+  color: #d6336c;
+  margin-bottom: 10px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.day {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #eee;
+  transition: 0.3s;
+}
+
+.day.available {
+  background: #c8f7c5; /* green */
+}
+
+.day.unavailable {
+  background: #f7c5c5; /* red */
+  cursor: not-allowed;
+}
+
+.day:hover.available {
+  background: #b6f0b3;
+}
+
+.day.selected {
+  border: 2px solid #d6336c;
+  background: #ffe1ec;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.booking-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.booking-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d6336c;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.booking-form button:hover {
+  background: #b52a5d;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -37,6 +37,27 @@
 </head>
 
 <body>
+
+<!-- ========== BOOKING POPUP OVERLAY ========== -->
+<div id="bookingOverlay" class="booking-overlay">
+  <div class="booking-modal">
+    <span id="closeBooking" class="close-btn">&times;</span>
+    <h2>Book Your Appointment</h2>
+    <p>Select a date and fill in your details below.</p>
+
+    <div id="calendar" class="calendar"></div>
+
+    <form id="bookingForm" class="booking-form">
+      <input type="text" id="bookName" placeholder="Your Name" required>
+      <input type="email" id="bookEmail" placeholder="Your Email" required>
+      <input type="tel" id="bookPhone" placeholder="Your Phone Number" required>
+      <input type="text" id="selectedDate" placeholder="Selected Date" readonly required>
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+
   <!-- ========== BANNER SECTION ========== -->
   <section id="banner">
     <nav class="navbar">
@@ -121,6 +142,47 @@
     <div id="testimonialCards" class="testimonial-cards hidden"></div>
   </div>
 </section>
+
+
+<!-- ========== CONTACT SECTION ========== -->
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="contact-subtitle">Have a question or want to book an appointment? We’d love to hear from you!</p>
+
+    <div class="contact-content">
+      <!-- Contact Form -->
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="contactName" placeholder="Your Name" required>
+        <input type="email" id="contactEmail" placeholder="Your Email" required>
+        <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><i class="fa-solid fa-location-dot"></i> 12 High Street, Colchester, UK</p>
+        <p><i class="fa-solid fa-phone"></i> +44 7712 345 678</p>
+        <p><i class="fa-solid fa-envelope"></i> info@nu-trendz.co.uk</p>
+
+        <div class="social-links">
+          <a href="https://www.facebook.com/p/Nu-trendz-100037624576513/" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/explore/locations/705522836222546/nu-trendz/" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
   <!-- ===== External JS ===== -->
   <script src="nu-trendz.js"></script>
