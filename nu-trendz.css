@@ -79,7 +79,7 @@ body {
   transform: scale(1.05);
 }
 
-/* ======= NAVBAR ======= */
+/* ====================== NAVBAR ====================== */
 .navbar {
   position: fixed;
   top: 20px;
@@ -100,6 +100,7 @@ body {
   z-index: 9999;
 }
 
+/* Logo */
 .logotwo {
   font-size: 1.8rem;
   font-weight: 700;
@@ -107,7 +108,7 @@ body {
   color: #fff;
 }
 
-/* Desktop Nav Links */
+/* Desktop Navigation */
 .nav-links {
   list-style: none;
   display: flex;
@@ -123,9 +124,12 @@ body {
   font-weight: 600;
   transition: color .3s;
 }
-.nav-links a:hover { color: #ffb84d; }
 
-/* Hamburger */
+.nav-links a:hover { 
+  color: #ffb84d; 
+}
+
+/* Hamburger Menu */
 .menu-icon {
   width: 30px;
   height: 22px;
@@ -135,6 +139,7 @@ body {
   cursor: pointer;
   z-index: 10001;
 }
+
 .bar {
   height: 3px;
   width: 100%;
@@ -142,20 +147,25 @@ body {
   border-radius: 5px;
   transition: all .4s;
 }
-#menu-toggle { display: none; }
 
-/* Hamburger turns to X */
+#menu-toggle { 
+  display: none; 
+}
+
+/* Hamburger Animation */
 #menu-toggle:checked + .menu-icon .bar:nth-child(1) {
   transform: rotate(45deg) translateY(8px);
 }
+
 #menu-toggle:checked + .menu-icon .bar:nth-child(2) {
   opacity: 0;
 }
+
 #menu-toggle:checked + .menu-icon .bar:nth-child(3) {
   transform: rotate(-45deg) translateY(-8px);
 }
 
-/* Shrink mode (scroll) */
+/* Shrink/Floating Mode */
 .navbar.shrink {
   width: auto;
   top: 15px;
@@ -168,79 +178,30 @@ body {
   backdrop-filter: blur(20px);
   box-shadow: 0 4px 25px rgba(0,0,0,0.25);
 }
+
 .navbar.shrink .logotwo { display: none; }
 .navbar.shrink .menu-icon { display: flex; }
 .navbar.shrink .nav-links { display: none; }
 
-/* Dropdown (desktop floating, right side) */
+/* Floating Dropdown Menu */
 .navbar.shrink #menu-toggle:checked ~ .nav-links {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 70px;
-  right: 20px;
-  background: rgba(30,30,30,0.85);
+  top: 60px;
+  right: 80px;
+  background: rgba(30,30,30,0.9);
   backdrop-filter: blur(25px);
   border-radius: 16px;
   width: 220px;
   padding: 20px 25px;
-  text-align: right;
+  text-align: left;
   box-shadow: 0 4px 25px rgba(0,0,0,0.4);
-  animation: slideRight 0.3s ease forwards;
+  animation: popRight .3s ease forwards;
   z-index: 10000;
 }
 
-@keyframes slideRight {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* ======= MOBILE VIEW ======= */
-@media (max-width: 768px) {
-  .menu-icon { display: flex; }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    background: rgba(30,30,30,0.9);
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    overflow: hidden;
-    text-align: center;
-  }
-
-  /* Show dropdown when checked */
-  #menu-toggle:checked ~ .nav-links {
-    display: flex;
-    animation: dropDown 0.3s ease forwards;
-  }
-
-  @keyframes dropDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .nav-links li {
-    margin: 15px 0;
-  }
-}
-
-/* ======= BANNER ======= */
+/* ====================== BANNER SECTION ====================== */
 #banner {
   background: linear-gradient(rgba(0,0,0,0.5), #64420f73),
     url(IMAGES/hairwash.jpg) center/cover no-repeat fixed;
@@ -248,35 +209,114 @@ body {
   text-align: center;
   padding-top: 120px;
 }
-.logo { width: 120px; margin-bottom: 20px; }
-.fp_content {
-  max-width: 700px; margin: 50px auto; padding: 20px; text-align: center;
-  color: #fff; font-family: 'Montserrat', sans-serif;
+
+.logo { 
+  width: 120px; 
+  margin-bottom: 20px; 
 }
+
+/* Banner Content */
+.fp_content {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .fp_content h1 {
   font-size: clamp(2rem,5vw,3rem);
-  font-weight: 700; text-transform: uppercase; margin-bottom: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 15px;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
 }
+
 .fp_content h2 {
   font-size: clamp(1.5rem,4vw,2rem);
-  font-weight: 600; color: #ffb84d; margin-bottom: 15px;
+  font-weight: 600;
+  color: #ffb84d;
+  margin-bottom: 15px;
 }
+
 .fp_content p {
   font-size: clamp(1rem,2.5vw,1.25rem);
-  color: #ffffffcc; margin-bottom: 25px;
+  color: #ffffffcc;
+  margin-bottom: 25px;
 }
+
 .fp_content button {
-  background: #ff9800; color: white; border: none;
-  padding: 12px 35px; font-size: 1rem; border-radius: 30px;
-  cursor: pointer; transition: all 0.3s ease;
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 35px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
 .fp_content button:hover {
-  background: #ffb84d; box-shadow: 0 0 15px #ff9800;
-  color: #333; transform: scale(1.05);
+  background: #ffb84d;
+  box-shadow: 0 0 15px #ff9800;
+  color: #333;
+  transform: scale(1.05);
 }
 
+/* ====================== ANIMATIONS ====================== */
+@keyframes popRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
+/* ====================== MEDIA QUERIES ====================== */
+@media (max-width: 768px) {
+  .menu-icon { 
+    display: flex; 
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 75%;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    left: auto;
+    background: rgba(30,30,30,0.9);
+    border-radius: 0 0 0 16px;
+    text-align: right;
+    box-shadow: -4px 4px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+
+  #menu-toggle:checked ~ .nav-links {
+    display: flex;
+    animation: slideFromRight 0.3s ease forwards;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  @keyframes slideFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(50%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
 
 
 
