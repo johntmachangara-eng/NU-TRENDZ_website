@@ -19,6 +19,20 @@ links.forEach(link => {
   });
 });
 
+const floatingLogo = document.getElementById('floatingLogo');
+
+// Show floating logo when navbar shrinks
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 200) {
+    navbar.classList.add('shrink');
+    floatingLogo.classList.add('visible');
+  } else {
+    navbar.classList.remove('shrink');
+    floatingLogo.classList.remove('visible');
+  }
+});
+
+
 
 // ==================== MAIN INITIALIZER ====================
 document.addEventListener('DOMContentLoaded', () => {
