@@ -103,7 +103,7 @@ body {
 
 /* ==================== BANNER ==================== */
 #banner {
-  background: linear-gradient(rgba(0,0,0,0.5), #64420f73), url(IMAGES/hairwash.png) center/cover no-repeat fixed;
+  background: linear-gradient(rgba(0,0,0,0.5), #64420f73), url(IMAGES/hairwash.jpg) center/cover no-repeat fixed;
   min-height: 100vh;
   text-align: center;
   padding-top: 120px;
@@ -392,229 +392,210 @@ body {
 
 
 
-
-/* ==================== PORTFOLIO GRID ==================== */
-.portfolio-section {
-  padding: 80px 20px;
-  background: #faf7f2;
-  text-align: center;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.portfolio-item {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.portfolio-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.portfolio-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.portfolio-item:hover img {
-  transform: scale(1.07);
-}
-
-/* Overlay */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.portfolio-item:hover .overlay {
-  opacity: 1;
-}
-
-.overlay h3 {
-  color: #fff;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: rgba(255, 152, 0, 0.85);
-  padding: 10px 20px;
-  border-radius: 8px;
-}
-
-/* ==================== PORTFOLIO MODAL ==================== */
-.portfolio-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.portfolio-modal.active {
-  display: flex;
-  opacity: 1;
-}
-
-.modal-content {
-  background: #fff;
-  border-radius: 16px;
-  max-width: 900px;
-  width: 90%;
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  transform: translateY(30px);
-  opacity: 0;
-  animation: modalSlideUp 0.5s forwards ease;
-  position: relative;
-}
-
-@keyframes modalSlideUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
+ /* ======= PORTFOLIO SECTION STYLES ======= */
+  :root {
+    --accent1: 255, 193, 7; /* golden amber */
+    --accent2: 255, 107, 107; /* coral-red */
+    --dark: 45, 45, 45;
   }
-  to {
-    transform: translateY(0);
+
+  .portfolio-section {
+    background: linear-gradient(180deg, #fff7e6 0%, #fbe5c8 100%);
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .title-text p {
+    font-weight: 700;
+    color: rgba(var(--dark), 0.7);
+    letter-spacing: 3px;
+    margin: 0;
+  }
+
+  .title-text h1 {
+    font-size: 2.6rem;
+    color: rgb(var(--dark));
+    margin-top: 12px;
+  }
+
+  /* GRID LAYOUT */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 10px;
+  }
+
+  /* CARD DESIGN */
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .portfolio-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(var(--accent1), 0.4);
+  }
+
+  .portfolio-item img {
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .portfolio-item:hover img {
+    transform: scale(1.06);
+  }
+
+  /* Overlay gradient with floating button */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(var(--accent2), 0.1) 0%,
+      rgba(var(--accent1), 0.65) 70%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .portfolio-item:hover .overlay {
     opacity: 1;
   }
-}
 
-/* Image Section */
-.modal-image-container {
-  flex: 1;
-  min-width: 45%;
-  background: #000;
-}
-
-.modal-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Text Section */
-.modal-text {
-  flex: 1;
-  padding: 30px;
-  text-align: left;
-  font-family: "Poppins", sans-serif;
-}
-
-.modal-text h2 {
-  color: #d6336c;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-
-.modal-text p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.modal-text h4 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: #ff9800;
-}
-
-.modal-text ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.modal-text ul li {
-  position: relative;
-  margin-bottom: 10px;
-  padding-left: 20px;
-  color: #444;
-}
-
-.modal-text ul li::before {
-  content: "✔";
-  color: #ff9800;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-/* Close Button */
-.close-modal {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  font-size: 2rem;
-  color: #ff9800;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  z-index: 10;
-}
-
-.close-modal:hover {
-  color: #d6336c;
-}
-
-/* ==================== RESPONSIVE ==================== */
-@media (max-width: 768px) {
-  .modal-content {
-    flex-direction: column;
-    max-width: 95%;
-  }
-
-  .modal-text {
-    padding: 20px;
-  }
-
-  .modal-text h2 {
-    font-size: 1.5rem;
-  }
-
-  .modal-text p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
   .overlay h3 {
-    font-size: 1.1rem;
-    padding: 8px 15px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 
-  .modal-text {
-    padding: 18px;
+  .overlay-cta {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    cursor: pointer;
+    color: rgb(var(--dark));
+    box-shadow: 0 8px 20px rgba(var(--accent1), 0.4);
+    transition: all 0.3s ease;
   }
 
-  .modal-text ul li {
-    font-size: 0.9rem;
+  .overlay-cta:hover {
+    background: #fff;
+    transform: translateY(-2px);
   }
-}
+
+  /* ===== Modal Glass Look ===== */
+  .portfolio-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 25px;
+  }
+
+  .modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 18px;
+    width: min(850px, 94vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.35s ease;
+    position: relative;
+    padding-bottom: 20px;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .modal-media img {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .glass-card {
+    margin-top: 0;
+    padding: 20px 28px 30px;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+    border-top: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .glass-card h2 {
+    margin: 10px 0;
+    font-size: 1.6rem;
+  }
+
+  .glass-card p {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .glass-card ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .glass-card li {
+    margin: 5px 0;
+    list-style: disc;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 992px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+    .portfolio-item img {
+      height: 260px;
+    }
+  }
 
 
 
@@ -986,6 +967,13 @@ form button:hover {
 
 
 
+/* ==================== GLOBAL HELPERS ==================== */
+.hidden {
+  display: none !important;
+}
+.show {
+  display: flex !important;
+}
 
 /* ==================== BOOKING OVERLAY ==================== */
 .booking-overlay {
@@ -1027,12 +1015,12 @@ form button:hover {
   color: #ff9800;
 }
 
-.booking-modal h2 {
+.booking-modal h2, .booking-modal h1 {
   color: #d6336c;
   margin-bottom: 10px;
 }
 
-.calendar {
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
@@ -1046,14 +1034,15 @@ form button:hover {
   cursor: pointer;
   background: #eee;
   transition: 0.3s;
+  outline: none;
 }
 
 .day.available {
-  background: #c8f7c5; /* green */
+  background: #c8f7c5;
 }
 
 .day.unavailable {
-  background: #f7c5c5; /* red */
+  background: #f7c5c5;
   cursor: not-allowed;
 }
 
@@ -1106,15 +1095,6 @@ form button:hover {
   }
 }
 
-
-
-
-
-
-
-
-
-
 /* ==================== FLOATING BOOK NOW BUTTON ==================== */
 .floating-book-btn {
   position: fixed;
@@ -1135,6 +1115,8 @@ form button:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .floating-book-btn i {
@@ -1147,7 +1129,6 @@ form button:hover {
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
-/* Make smaller on mobile */
 @media (max-width: 600px) {
   .floating-book-btn {
     bottom: 15px;

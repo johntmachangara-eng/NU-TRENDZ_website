@@ -1,191 +1,201 @@
-// nu-trendz.js
+// ==================== MAIN INITIALIZER ====================
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('testimonialForm');
-  const testimonialCards = document.getElementById('testimonialCards');
-
-  if (!db) {
-    console.error('Firebase database is not initialized.');
+  if (typeof db === 'undefined') {
+    console.error("Firebase database not initialized. Please ensure Firebase is loaded before this script.");
     return;
   }
 
-  // Add sample reviews if database is empty
-  db.ref('testimonials').once('value', (snapshot) => {
-    if (!snapshot.exists()) {
-      db.ref('testimonials').push({ name: "Alice", message: "Absolutely loved my haircut!" });
-      db.ref('testimonials').push({ name: "Liam", message: "Staff were friendly and professional." });
-      db.ref('testimonials').push({ name: "Mia", message: "Best salon experience in town!" });
-    }
-  });
-
-  // Handle form submission
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    if (!name || !message) {
-      alert("Please fill out all fields.");
-      return;
-    }
-
-    db.ref('testimonials').push({
-      name,
-      message,
-      timestamp: Date.now()
-    });
-
-    alert("✅ Thank you for your review!");
-    form.reset();
-  });
-
-  // Fetch and display testimonials
-  db.ref('testimonials').on('value', (snapshot) => {
-    testimonialCards.innerHTML = '';
-    const reviews = [];
-
-    snapshot.forEach((childSnapshot) => {
-      reviews.push(childSnapshot.val());
-    });
-
-    reviews.reverse().forEach((data) => {
-      testimonialCards.innerHTML += `
-        <div class="testimonial-card">
-          <p class="testimonial-text">"${data.message}"</p>
-          <h3 class="client-name">– ${data.name}</h3>
-        </div>
-      `;
-    });
-  });
-});
-
-// Toggle show/hide reviews
-const toggleBtn = document.getElementById('toggleReviews');
-const testimonialCards = document.getElementById('testimonialCards');
-
-toggleBtn.addEventListener('click', () => {
-  const isHidden = testimonialCards.classList.contains('hidden');
-
-  if (isHidden) {
-    testimonialCards.classList.remove('hidden');
-    testimonialCards.classList.add('show');
-    toggleBtn.textContent = "Hide Reviews";
-  } else {
-    testimonialCards.classList.add('hidden');
-    testimonialCards.classList.remove('show');
-    toggleBtn.textContent = "Show Reviews";
-  }
+  initTestimonials();
+  initContactForm();
+  initBookingCalendar();
+  initBookingModal();
+  initFloatingButton();
 });
 
 
+ document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".portfolio-item");
+    const modal = document.getElementById("portfolioModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const modalList = document.getElementById("modalList");
+    const closeModal = document.querySelector(".close-modal");
+
+    const services = {
+      braids: {
+        title: "Box Braids",
+        desc: "Intricately woven box braids that protect and style your natural hair beautifully.",
+        image: "IMAGES/hair-1.jpeg",
+        includes: ["Consultation", "Parting & Sectioning", "Protective Braiding", "Finishing & Care Advice"],
+      },
+      balayage: {
+        title: "Balayage Blend",
+        desc: "A seamless blend of soft highlights and natural tones that enhance your hair’s dimension.",
+        image: "IMAGES/hair-2.jpeg",
+        includes: ["Consultation", "Custom Color Application", "Toning", "Blow Dry & Style"],
+      },
+      curly: {
+        title: "Curly Volume",
+        desc: "Defined curls that add bounce, shine, and confidence — perfect for everyday or events.",
+        image: "IMAGES/hair-3.jpeg",
+        includes: ["Hydration Treatment", "Curl Defining", "Diffused Drying", "Frizz Control Finish"],
+      },
+      golden: {
+        title: "Golden Curls",
+        desc: "Rich golden tones and soft curls that glow with warmth and definition.",
+        image: "IMAGES/hair-4.jpeg",
+        includes: ["Wash & Treatment", "Curl Styling", "Shine Enhancer", "Finishing Touches"],
+      },
+      cornrows: {
+        title: "Creative Cornrows",
+        desc: "Custom braided cornrow styles designed for individuality and flair.",
+        image: "IMAGES/hair-5.jpeg",
+        includes: ["Consultation", "Scalp Prep", "Cornrow Design", "Finishing Oil & Care"],
+      },
+      straight: {
+        title: "Sleek Straight",
+        desc: "Smooth, glossy, straight hair with a healthy shine and long-lasting finish.",
+        image: "IMAGES/hair-6.jpeg",
+        includes: ["Wash & Blow Dry", "Heat Protectant", "Straightening", "Shine Serum Finish"],
+      },
+    };
+
+    items.forEach(item => {
+      item.addEventListener("click", () => {
+        const key = item.dataset.service;
+        const s = services[key];
+        modalImage.src = s.image;
+        modalTitle.textContent = s.title;
+        modalDesc.textContent = s.desc;
+        modalList.innerHTML = s.includes.map(i => `<li>${i}</li>`).join("");
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    });
+
+    modal.addEventListener("click", e => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+    });
+  });
 
 
+// ==================== TESTIMONIALS ====================
+function initTestimonials() {
+  const form = document.getElementById('testimonialForm');
+  const testimonialCards = document.getElementById('testimonialCards');
+  const toggleBtn = document.getElementById('toggleReviews');
 
-
-
-
-
-
-// ================= CONTACT FORM BACKEND =================
-document.addEventListener('DOMContentLoaded', () => {
-  const contactForm = document.getElementById('contactForm');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+  if (form) {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
+      const name = document.getElementById('name')?.value.trim();
+      const message = document.getElementById('message')?.value.trim();
 
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
-
-      if (!name || !email || !message) {
-        alert("Please fill out all fields before sending.");
+      if (!name || !message) {
+        alert("Please fill in both fields before submitting.");
         return;
       }
 
-      // ✅ Store data in Firebase Realtime Database
-      db.ref('contactMessages').push({
-        name,
-        email,
-        message,
-        timestamp: new Date().toISOString()
-      })
-      .then(() => {
-        alert("✅ Thank you! Your message has been recorded successfully.");
-        contactForm.reset();
-      })
-      .catch((error) => {
-        console.error("Error saving message:", error);
-        alert("❌ Sorry, something went wrong. Please try again later.");
+      db.ref('testimonials').push({ name, message })
+        .then(() => {
+          form.reset();
+          form.insertAdjacentHTML('beforeend', '<p class="success-msg" aria-live="polite">✅ Thank you for your review!</p>');
+          setTimeout(() => document.querySelector('.success-msg')?.remove(), 3000);
+        })
+        .catch(err => console.error("Error saving testimonial:", err));
+    });
+  }
+
+  if (testimonialCards && db) {
+    db.ref('testimonials').on('value', (snapshot) => {
+      testimonialCards.innerHTML = '';
+      snapshot.forEach((childSnapshot) => {
+        const data = childSnapshot.val();
+        testimonialCards.innerHTML += `
+          <div class="testimonial-card">
+            <p class="testimonial-text">"${escapeHTML(data.message)}"</p>
+            <h3 class="client-name">– ${escapeHTML(data.name)}</h3>
+          </div>
+        `;
       });
     });
   }
-});
 
+  if (toggleBtn && testimonialCards) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = testimonialCards.classList.contains('hidden');
+      testimonialCards.classList.toggle('hidden', !isHidden);
+      testimonialCards.classList.toggle('show', isHidden);
+      toggleBtn.textContent = isHidden ? "Hide Reviews" : "Show Reviews";
+    });
+  }
+}
 
+// ==================== CONTACT FORM ====================
+function initContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  if (!contactForm) return;
 
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
 
+    if (!name || !email || !message) {
+      alert("⚠️ Please fill out all fields before sending.");
+      return;
+    }
 
+    db.ref('contactMessages').push({
+      name, email, message,
+      timestamp: new Date().toISOString()
+    })
+    .then(() => {
+      alert("✅ Thank you! Your message has been sent successfully.");
+      contactForm.reset();
+    })
+    .catch((error) => {
+      console.error("Error saving message:", error);
+      alert("❌ Sorry, something went wrong. Please try again later.");
+    });
+  });
+}
 
-
-
-// ==================== BOOK NOW POPUP ====================
-document.addEventListener('DOMContentLoaded', () => {
-  const bookNowBtn = document.querySelector('.fp_content button');
-  const floatingBookBtn = document.getElementById('floatingBookNow'); // Floating button
-  const overlay = document.getElementById('bookingOverlay');
-  const closeBtn = document.getElementById('closeBooking');
+// ==================== BOOKING CALENDAR ====================
+function initBookingCalendar() {
   const calendar = document.getElementById('calendar');
   const selectedDateInput = document.getElementById('selectedDate');
   const bookingForm = document.getElementById('bookingForm');
-  const bookingsRef = db.ref('bookings');
+  if (!calendar || !bookingForm) return;
+
   const today = new Date();
+  const bookingsRef = db.ref('bookings');
   let bookedDates = new Set();
+  let renderTimeout;
 
-  // ===== SHOW POPUP =====
-  function openBookingPopup() {
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // prevent background scroll
-  }
-
-  // Main banner button opens popup
-  if (bookNowBtn) {
-    bookNowBtn.addEventListener('click', openBookingPopup);
-  }
-
-  // Floating button also opens popup
-  if (floatingBookBtn) {
-    floatingBookBtn.addEventListener('click', openBookingPopup);
-  }
-
-  // ===== CLOSE POPUP =====
-  function closeBooking() {
-    overlay.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeBooking);
-  }
-
-  // Close when clicking outside modal
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeBooking();
-  });
-
-  // ===== FETCH EXISTING BOOKINGS =====
   bookingsRef.on('value', (snapshot) => {
-    bookedDates.clear();
-    snapshot.forEach((child) => {
-      bookedDates.add(child.val().date);
-    });
-    generateCalendar();
+    clearTimeout(renderTimeout);
+    renderTimeout = setTimeout(() => {
+      bookedDates = new Set(Object.values(snapshot.val() || {}).map(b => b.date));
+      generateCalendar();
+    }, 300);
   });
 
-  // ===== GENERATE CALENDAR (next 30 days) =====
   function generateCalendar() {
-    calendar.innerHTML = '';
+    calendar.innerHTML = '<h3>Next 30 Days</h3><div class="calendar-grid"></div>';
+    const grid = calendar.querySelector('.calendar-grid');
+
     for (let i = 0; i < 30; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
@@ -193,27 +203,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const div = document.createElement('div');
       div.classList.add('day');
+      div.tabIndex = 0;
+      div.textContent = date.getDate();
 
       if (bookedDates.has(formatted)) {
         div.classList.add('unavailable');
       } else {
         div.classList.add('available');
         div.addEventListener('click', () => selectDate(formatted, div));
+        div.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') selectDate(formatted, div);
+        });
       }
-
-      div.textContent = date.getDate();
-      calendar.appendChild(div);
+      grid.appendChild(div);
     }
   }
 
-  // ===== SELECT DATE =====
   function selectDate(date, element) {
     document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
     element.classList.add('selected');
     selectedDateInput.value = date;
   }
 
-  // ===== SUBMIT BOOKING =====
   bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -223,146 +234,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const date = selectedDateInput.value.trim();
 
     if (!name || !email || !phone || !date) {
-      alert("Please fill in all fields and select a date.");
+      alert("⚠️ Please fill in all fields and select a date.");
       return;
     }
 
     if (bookedDates.has(date)) {
-      alert("Sorry, that date is already booked.");
+      alert("❌ Sorry, that date is already booked.");
       return;
     }
 
-    bookingsRef.push({
-      name,
-      email,
-      phone,
-      date,
-      timestamp: new Date().toISOString()
-    })
-    .then(() => {
-      alert("✅ Booking confirmed!");
-      bookingForm.reset();
-      selectedDateInput.value = '';
-      closeBooking();
-    })
-    .catch((err) => console.error("Error saving booking:", err));
+    bookingsRef.push({ name, email, phone, date, timestamp: new Date().toISOString() })
+      .then(() => {
+        alert("✅ Booking confirmed!");
+        bookingForm.reset();
+        selectedDateInput.value = '';
+        generateCalendar();
+      })
+      .catch(err => {
+        console.error("Error saving booking:", err);
+        alert("❌ Something went wrong. Please try again later.");
+      });
   });
-});
+}
 
+// ==================== BOOKING MODAL POPUP ====================
+function initBookingModal() {
+  const floatingBtn = document.getElementById('floatingBookBtn');
+  const overlay = document.getElementById('bookingOverlay');
+  const closeBtn = document.getElementById('closeBooking');
+  if (!floatingBtn || !overlay) return;
 
-
-
-// ==================== PORTFOLIO FLOATING SUBPAGE ====================
-document.addEventListener("DOMContentLoaded", () => {
-  const items = document.querySelectorAll(".portfolio-item");
-  const modal = document.getElementById("portfolioModal");
-  const modalImage = document.getElementById("modalImage");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalDesc = document.getElementById("modalDesc");
-  const modalList = document.getElementById("modalList");
-  const closeBtn = document.querySelector(".close-modal");
-
-  // === Service Information ===
-  const services = {
-    braids: {
-      title: "Box Braids",
-      desc: "Intricately woven box braids that protect and style your natural hair beautifully.",
-      image: "IMAGES/hair-1.jpeg",
-      includes: [
-        "Consultation",
-        "Parting & Sectioning",
-        "Protective Braiding",
-        "Finishing & Care Advice",
-      ],
-    },
-    balayage: {
-      title: "Balayage Blend",
-      desc: "A seamless blend of soft highlights and natural tones that enhance your hair’s dimension.",
-      image: "IMAGES/hair-2.jpeg",
-      includes: [
-        "Consultation",
-        "Custom Color Application",
-        "Toning",
-        "Blow Dry & Style",
-      ],
-    },
-    curly: {
-      title: "Curly Volume",
-      desc: "Defined curls that add bounce, shine, and confidence — perfect for everyday or events.",
-      image: "IMAGES/hair-3.jpeg",
-      includes: [
-        "Hydration Treatment",
-        "Curl Defining",
-        "Diffused Drying",
-        "Frizz Control Finish",
-      ],
-    },
-    golden: {
-      title: "Golden Curls",
-      desc: "Rich golden tones and soft curls that glow with warmth and definition.",
-      image: "IMAGES/hair-4.jpeg",
-      includes: [
-        "Wash & Treatment",
-        "Curl Styling",
-        "Shine Enhancer",
-        "Finishing Touches",
-      ],
-    },
-    cornrows: {
-      title: "Creative Cornrows",
-      desc: "Custom braided cornrow styles designed for individuality and flair.",
-      image: "IMAGES/hair-5.jpeg",
-      includes: [
-        "Consultation",
-        "Scalp Prep",
-        "Cornrow Design",
-        "Finishing Oil & Care",
-      ],
-    },
-    straight: {
-      title: "Sleek Straight",
-      desc: "Smooth, glossy, straight hair with a healthy shine and long-lasting finish.",
-      image: "IMAGES/hair-6.jpeg",
-      includes: [
-        "Wash & Blow Dry",
-        "Heat Protectant",
-        "Straightening",
-        "Shine Serum Finish",
-      ],
-    },
-  };
-
-  // === Open Modal ===
-  items.forEach((item) => {
-    item.addEventListener("click", () => {
-      const key = item.getAttribute("data-service");
-      const s = services[key];
-      if (!s) return;
-
-      // Inject data
-      modalImage.src = s.image;
-      modalTitle.textContent = s.title;
-      modalDesc.textContent = s.desc;
-      modalList.innerHTML = s.includes.map((i) => `<li>${i}</li>`).join("");
-
-      // Show modal
-      modal.style.display = "flex";
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
+  floatingBtn.addEventListener('click', () => {
+    overlay.classList.remove('hidden');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
   });
 
-  // === Close Modal ===
-  closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
+  closeBtn?.addEventListener('click', () => closeModal());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 
   function closeModal() {
-    modal.classList.remove("active");
-    setTimeout(() => {
-      modal.style.display = "none";
-      document.body.style.overflow = "auto";
-    }, 300);
+    overlay.classList.add('hidden');
+    overlay.classList.remove('show');
+    document.body.style.overflow = 'auto';
   }
-});
+}
+
+// ==================== FLOATING BOOK NOW BUTTON ====================
+function initFloatingButton() {
+  window.addEventListener('scroll', () => {
+    const floatingBtn = document.getElementById('floatingBookBtn');
+    if (!floatingBtn) return;
+    const show = window.scrollY > 300;
+    floatingBtn.style.opacity = show ? '1' : '0';
+    floatingBtn.style.visibility = show ? 'visible' : 'hidden';
+  });
+}
+
+// ==================== HELPER: SANITIZE HTML ====================
+function escapeHTML(str) {
+  return str.replace(/[&<>"']/g, (m) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]
+  ));
+}
