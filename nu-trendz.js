@@ -12,7 +12,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Close menu after clicking a link
+// Close menu when clicking a link
 links.forEach(link => {
   link.addEventListener('click', () => {
     menuToggle.checked = false;
