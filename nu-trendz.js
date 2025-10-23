@@ -208,128 +208,77 @@ function initContactForm() {
   });
 }
 
-// ==================== BOOKING CALENDAR ====================
-function initBookingCalendar() {
-  const calendar = document.getElementById('calendar');
-  const selectedDateInput = document.getElementById('selectedDate');
-  const bookingForm = document.getElementById('bookingForm');
-  if (!calendar || !bookingForm) return;
+// ===== Floating Button Visibility =====
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('floatingBookBtn');
+  if (!btn) return;
+  btn.style.opacity = window.scrollY > 100 ? '1' : '0';
+  btn.style.visibility = window.scrollY > 100 ? 'visible' : 'hidden';
+});
 
-  const today = new Date();
-  const bookingsRef = db.ref('bookings');
-  let bookedDates = new Set();
-  let renderTimeout;
+// ===== Booking Modal Logic =====
+const floatingBtn = document.getElementById('floatingBookBtn');
+const overlay = document.getElementById('bookingOverlay');
+const closeBtn = document.getElementById('closeBooking');
+const selectedDateInput = document.getElementById('selectedDate');
+const calendar = document.getElementById('calendar');
 
-  bookingsRef.on('value', (snapshot) => {
-    clearTimeout(renderTimeout);
-    renderTimeout = setTimeout(() => {
-      bookedDates = new Set(Object.values(snapshot.val() || {}).map(b => b.date));
-      generateCalendar();
-    }, 300);
-  });
+// ===== MODAL OPEN / CLOSE =====
+floatingBtn.addEventListener('click', () => {
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden'; // disable background scroll
+});
 
-  function generateCalendar() {
-    calendar.innerHTML = '<h3>Next 30 Days</h3><div class="calendar-grid"></div>';
-    const grid = calendar.querySelector('.calendar-grid');
+closeBtn.addEventListener('click', closeBookingModal);
 
-    for (let i = 0; i < 30; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-      const formatted = date.toISOString().split('T')[0];
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeBookingModal();
+});
 
-      const div = document.createElement('div');
-      div.classList.add('day');
-      div.tabIndex = 0;
-      div.textContent = date.getDate();
 
-      if (bookedDates.has(formatted)) {
-        div.classList.add('unavailable');
-      } else {
-        div.classList.add('available');
-        div.addEventListener('click', () => selectDate(formatted, div));
-        div.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') selectDate(formatted, div);
-        });
-      }
-      grid.appendChild(div);
-    }
-  }
-
-  function selectDate(date, element) {
-    document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
-    element.classList.add('selected');
-    selectedDateInput.value = date;
-  }
-
-  bookingForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('bookName').value.trim();
-    const email = document.getElementById('bookEmail').value.trim();
-    const phone = document.getElementById('bookPhone').value.trim();
-    const date = selectedDateInput.value.trim();
-
-    if (!name || !email || !phone || !date) {
-      alert("⚠️ Please fill in all fields and select a date.");
-      return;
-    }
-
-    if (bookedDates.has(date)) {
-      alert("❌ Sorry, that date is already booked.");
-      return;
-    }
-
-    bookingsRef.push({ name, email, phone, date, timestamp: new Date().toISOString() })
-      .then(() => {
-        alert("✅ Booking confirmed!");
-        bookingForm.reset();
-        selectedDateInput.value = '';
-        generateCalendar();
-      })
-      .catch(err => {
-        console.error("Error saving booking:", err);
-        alert("❌ Something went wrong. Please try again later.");
-      });
-  });
+// ===== FUNCTION TO CLOSE MODAL PROPERLY =====
+function closeBookingModal() {
+  overlay.classList.remove('show');
+  document.body.style.overflow = 'auto'; // re-enable scroll
 }
 
-// ==================== BOOKING MODAL POPUP ====================
-function initBookingModal() {
-  const floatingBtn = document.getElementById('floatingBookBtn');
-  const overlay = document.getElementById('bookingOverlay');
-  const closeBtn = document.getElementById('closeBooking');
-  if (!floatingBtn || !overlay) return;
-
-  floatingBtn.addEventListener('click', () => {
-    overlay.classList.remove('hidden');
+// ===== OPEN MODAL FROM HOME PAGE BUTTON =====
+const openBookingBtn = document.getElementById('openBookingBtn');
+if (openBookingBtn) {
+  openBookingBtn.addEventListener('click', () => {
     overlay.classList.add('show');
     document.body.style.overflow = 'hidden';
   });
-
-  closeBtn?.addEventListener('click', () => closeModal());
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-
-  function closeModal() {
-    overlay.classList.add('hidden');
-    overlay.classList.remove('show');
-    document.body.style.overflow = 'auto';
-  }
 }
 
-// ==================== FLOATING BOOK NOW BUTTON ====================
-function initFloatingButton() {
-  window.addEventListener('scroll', () => {
-    const floatingBtn = document.getElementById('floatingBookBtn');
-    if (!floatingBtn) return;
-    const show = window.scrollY > 300;
-    floatingBtn.style.opacity = show ? '1' : '0';
-    floatingBtn.style.visibility = show ? 'visible' : 'hidden';
+
+// ===== Generate Simple Calendar =====
+const today = new Date();
+for (let i = 0; i < 30; i++) {
+  const date = new Date(today);
+  date.setDate(today.getDate() + i);
+  const formatted = date.toISOString().split('T')[0];
+  const div = document.createElement('div');
+  div.className = 'day available';
+  div.textContent = date.getDate();
+  div.addEventListener('click', () => {
+    document.querySelectorAll('.day').forEach(d => d.classList.remove('selected'));
+    div.classList.add('selected');
+    selectedDateInput.value = formatted;
   });
+  calendar.appendChild(div);
 }
 
-// ==================== HELPER: SANITIZE HTML ====================
-function escapeHTML(str) {
-  return str.replace(/[&<>"']/g, (m) => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]
-  ));
-}
+// ===== Handle Form Submission (placeholder logic) =====
+document.getElementById('bookingForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!selectedDateInput.value) {
+    alert('⚠️ Please select a date before confirming.');
+    return;
+  }
+  alert(`✅ Appointment booked for ${selectedDateInput.value}!`);
+  overlay.classList.remove('show');
+  e.target.reset();
+});
+
+

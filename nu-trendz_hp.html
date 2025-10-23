@@ -63,9 +63,9 @@
       <h1>DISCOVER YOUR BEST SELF AT</h1>
       <h2>NU-TRENDZ</h2>
       <p>Expert cuts, colour & beauty treatments in the heart of Colchester</p>
-      <button type="button" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
-        <span></span>BOOK NOW
-      </button>
+      <button type="button" id="openBookingBtn"><span></span>BOOK NOW</button>
+
+
     </div>
   </div>
 </section>
@@ -214,31 +214,8 @@
     </div>
   </section>
 
-<!-- ===== FLOATING BOOK NOW BUTTON ===== -->
-<button id="floatingBookBtn" class="floating-book-btn" aria-label="Book an appointment" type="button">
-  <i class="fa-solid fa-calendar-check"></i> Book Now
-</button>
 
-<!-- ===== BOOKING MODAL ===== -->
-<div id="bookingOverlay" class="booking-overlay hidden">
-  <div class="booking-modal">
-    <button id="closeBooking" class="close-btn" aria-label="Close booking form" type="button">&times;</button>
-    <h1>Book Your Appointment</h1>
-    <p>Select an available date and fill in your details below to confirm your booking.</p>
 
-    <div class="booking-container">
-      <div id="calendar" class="calendar-grid"></div>
-
-      <form id="bookingForm" class="booking-form">
-        <input type="text" id="bookName" placeholder="Your Name" required>
-        <input type="email" id="bookEmail" placeholder="Your Email" required>
-        <input type="tel" id="bookPhone" placeholder="Your Phone Number" required>
-        <input type="text" id="selectedDate" placeholder="Selected Date" readonly required>
-        <button type="submit">Confirm Booking</button>
-      </form>
-    </div>
-  </div>
-</div>
 
 <!-- ====== CONTACT SECTION ====== -->
 <section id="contact" class="contact-section">
@@ -273,8 +250,33 @@
 </section>
 
 
+<!-- ===== FLOATING BOOK NOW BUTTON ===== -->
+<button id="floatingBookBtn" class="floating-book-btn" type="button">
+  <i class="fa-solid fa-calendar-check"></i> Book Now
+</button>
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingOverlay" class="booking-overlay">
+  <div class="booking-modal">
+    <button id="closeBooking" class="close-btn" aria-label="Close">&times;</button>
+    <h1>Book Your Appointment</h1>
+    <p>Select a date and fill in your details below.</p>
+
+    <div id="calendar" class="calendar-grid"></div>
+
+    <form id="bookingForm" class="booking-form">
+      <input type="text" id="bookName" placeholder="Your Name" required>
+      <input type="email" id="bookEmail" placeholder="Your Email" required>
+      <input type="tel" id="bookPhone" placeholder="Your Phone Number" required>
+      <input type="text" id="selectedDate" placeholder="Selected Date" readonly required>
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
 
   <!-- ====== JS FILES ====== -->
+  <script src="booking.js"></script>
   <script src="nu-trendz.js"></script>
   <script src="book-now.js"></script>
 </body>

@@ -1145,140 +1145,6 @@ form button:hover {
 }
 
 
-
-
-
-
-
-
-/* ==================== GLOBAL HELPERS ==================== */
-.hidden {
-  display: none !important;
-}
-.show {
-  display: flex !important;
-}
-
-/* ==================== BOOKING OVERLAY ==================== */
-.booking-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-}
-
-.booking-modal {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 420px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  animation: fadeIn 0.4s ease;
-  position: relative;
-  text-align: center;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.8rem;
-  color: #d6336c;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  color: #ff9800;
-}
-
-.booking-modal h2, .booking-modal h1 {
-  color: #d6336c;
-  margin-bottom: 10px;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  margin: 15px 0;
-}
-
-.day {
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  background: #eee;
-  transition: 0.3s;
-  outline: none;
-}
-
-.day.available {
-  background: #c8f7c5;
-}
-
-.day.unavailable {
-  background: #f7c5c5;
-  cursor: not-allowed;
-}
-
-.day:hover.available {
-  background: #b6f0b3;
-}
-
-.day.selected {
-  border: 2px solid #d6336c;
-  background: #ffe1ec;
-}
-
-.booking-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.booking-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-.booking-form button {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #d6336c;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.booking-form button:hover {
-  background: #b52a5d;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ==================== FLOATING BOOK NOW BUTTON ==================== */
 .floating-book-btn {
   position: fixed;
@@ -1295,16 +1161,12 @@ form button:hover {
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 999999;
+  z-index: 9999;
   display: flex;
   align-items: center;
   gap: 8px;
   opacity: 0;
   visibility: hidden;
-}
-
-.floating-book-btn i {
-  font-size: 1.2rem;
 }
 
 .floating-book-btn:hover {
@@ -1313,11 +1175,107 @@ form button:hover {
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 
-@media (max-width: 600px) {
-  .floating-book-btn {
-    bottom: 15px;
-    right: 15px;
-    padding: 12px 18px;
-    font-size: 0.9rem;
-  }
+.floating-book-btn i {
+  font-size: 1.2rem;
 }
+
+/* ==================== BOOKING MODAL ==================== */
+.booking-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.booking-overlay.show {
+  display: flex;
+}
+
+.booking-modal {
+  background: rgba(255,255,255,0.95);
+  color: #333;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: fadeIn 0.4s ease;
+  position: relative;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  color: #d6336c;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.close-btn:hover { color: #ff9800; }
+
+.booking-modal h1 { color: #d6336c; margin-bottom: 10px; }
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.day {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #eee;
+  transition: 0.3s;
+}
+.day.available { background: #c8f7c5; }
+.day.unavailable { background: #f7c5c5; cursor: not-allowed; }
+.day:hover.available { background: #b6f0b3; }
+.day.selected { border: 2px solid #d6336c; background: #ffe1ec; }
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+.booking-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.booking-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #d6336c;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.booking-form button:hover { background: #b52a5d; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
