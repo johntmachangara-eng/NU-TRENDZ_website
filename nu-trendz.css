@@ -1,10 +1,9 @@
-/* === Fix for navbar covering content & smooth scroll === */
+/* ========== BASIC SETUP & UTILITIES ========== */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px; /* Adjust this to your navbar height */
+  scroll-padding-top: 90px;
 }
 
-/* ========== BASIC RESET ========== */
 * {
   margin: 0;
   padding: 0;
@@ -17,115 +16,32 @@ body {
   background: #f5f5f5;
 }
 
-/* ==================== NAVBAR ==================== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  background-color: rgba(51, 51, 51, 0.95);
-  color: white;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  backdrop-filter: blur(5px);
-  z-index: 9999;
-}
-
-.logotwo {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  transition: max-height 0.4s ease-in-out;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #ff9800;
-}
-
-.menu-icon {
-  font-size: 28px;
-  cursor: pointer;
-  display: none;
-}
-
-#menu-toggle {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    flex-wrap: wrap;
-  }
-
-  .menu-icon {
-    display: block;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    background-color: rgba(51, 51, 51, 0.95);
-    border-radius: 8px;
-    margin-top: 10px;
-  }
-
-  #menu-toggle:checked + .menu-icon + .nav-links {
-    max-height: 500px;
-  }
-
-  .nav-links li {
-    margin: 15px 0;
-  }
-}
-
-/* ==================== BANNER ==================== */
+/* ======= BANNER SECTION ======= */
 #banner {
-  background: linear-gradient(rgba(0,0,0,0.5), #64420f73), url(IMAGES/hairwash.jpg) center/cover no-repeat fixed;
+  background: linear-gradient(rgba(0,0,0,0.5), #64420f73),
+    url(IMAGES/hairwash.jpg) center/cover no-repeat fixed;
   min-height: 100vh;
   text-align: center;
   padding-top: 120px;
 }
 
-
-.logo {
-  width: 120px;
-  margin-bottom: 20px;
+.logo { 
+  width: 120px; 
+  margin-bottom: 20px; 
 }
 
+/* Banner Content */
 .fp_content {
   max-width: 700px;
   margin: 50px auto;
   padding: 20px;
   text-align: center;
-  color: white;
+  color: #fff;
   font-family: 'Montserrat', sans-serif;
 }
 
 .fp_content h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem,5vw,3rem);
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -133,14 +49,14 @@ body {
 }
 
 .fp_content h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.5rem,4vw,2rem);
   font-weight: 600;
   color: #ffb84d;
   margin-bottom: 15px;
 }
 
 .fp_content p {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: clamp(1rem,2.5vw,1.25rem);
   color: #ffffffcc;
   margin-bottom: 25px;
 }
@@ -163,6 +79,145 @@ body {
   transform: scale(1.05);
 }
 
+/* ======= NAVBAR ======= */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  transition: all .4s ease;
+  z-index: 9999;
+}
+
+/* Logo */
+.logotwo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  transition: all .4s ease;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .3s;
+}
+
+.nav-links a:hover { 
+  color: #ffb84d; 
+}
+
+/* Hamburger Menu */
+.menu-icon {
+  width: 30px;
+  height: 22px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  transition: all .4s;
+}
+
+#menu-toggle { 
+  display: none; 
+}
+
+/* Hamburger Animation */
+#menu-toggle:checked + .menu-icon .bar:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+#menu-toggle:checked + .menu-icon .bar:nth-child(2) {
+  opacity: 0;
+}
+
+#menu-toggle:checked + .menu-icon .bar:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Shrink Mode */
+.navbar.shrink {
+  width: auto;
+  top: 15px;
+  right: 15px;
+  left: auto;
+  transform: none;
+  padding: 10px 15px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.25);
+}
+
+.navbar.shrink .logotwo { display: none; }
+.navbar.shrink .menu-icon { display: flex; }
+.navbar.shrink .nav-links { display: none; }
+
+/* Mobile Menu Dropdown */
+#menu-toggle:checked ~ .nav-links {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(30,30,30,0.85);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  width: 250px;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+  animation: fadeIn .3s ease forwards;
+  z-index: 10000;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translate(-50%, -60%);}
+  to {opacity: 1; transform: translate(-50%, -50%);}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-icon { display: flex; }
+  .nav-links { display: none; }
+  #menu-toggle:checked ~ .nav-links {
+    width: 80%;
+  }
+  .nav-links li { margin: 15px 0; }
+}
 
 
 

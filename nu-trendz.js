@@ -1,3 +1,25 @@
+const navbar = document.getElementById('navbar');
+const menuToggle = document.getElementById('menu-toggle');
+const links = document.querySelectorAll('.nav-links a');
+
+// Shrink navbar on scroll
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 200) {
+    navbar.classList.add('shrink');
+  } else {
+    navbar.classList.remove('shrink');
+    menuToggle.checked = false;
+  }
+});
+
+// Close menu after clicking a link
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    menuToggle.checked = false;
+  });
+});
+
+
 // ==================== MAIN INITIALIZER ====================
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof db === 'undefined') {
