@@ -1,0 +1,116 @@
+/* ==================== SERVICES ==================== */
+#Services {
+  width: 100%;
+  padding: 70px 20px;
+  background-color: rgba(0, 0, 0, 0.719);
+  scroll-margin-top: -90px;
+}
+
+.title-text {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.title-text p {
+  font-size: 20px;
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.title-text h1 {
+  font-size: 50px;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.service_box {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+}
+
+.services {
+  flex-basis: 50%;
+  padding-right: 20px;
+}
+
+.services_img {
+  flex-basis: 50%;
+  margin: auto;
+}
+
+.services_img img {
+  width: 50%;
+  border-radius: 10px;
+}
+
+.services h1 {
+  text-align: left;
+  color: #ff9800;
+}
+
+.service-desc {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  line-height: 50px;
+  border-radius: 8px;
+  color: #ff9800;
+  border: 1px solid #ff9800;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.service-icon:hover {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.service-text {
+  margin-left: 15px;
+  text-align: left;
+}
+
+.service-text p {
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+  .service_box {
+    width: 90%;
+  }
+
+  .services,
+  .services_img {
+    flex-basis: 100%;
+    margin-bottom: 40px;
+  }
+
+  .services_img img {
+    width: 70%;
+  }
+
+  .title-text h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title-text h1 {
+    font-size: 30px;
+  }
+
+  .services_img img {
+    width: 100%;
+  }
+}
+/* ==================== END OF SERVICES ==================== */
