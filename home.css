@@ -259,7 +259,7 @@ body {
 }
 
 /* ======= MOBILE VIEW (darker glass dropdown, rounded both ends) ======= */
-@media (max-width: 768px) {
+@media (max-width: 115px) {
   .menu-icon { display: flex; }
 
   .nav-links {
@@ -346,5 +346,6 @@ body {
 .navbar.shrink .logotwo {
   display: none;
 }
+
 
 
