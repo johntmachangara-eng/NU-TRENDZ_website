@@ -2,7 +2,8 @@
 #Services {
   width: 100%;
   padding: 70px 20px;
-  background-color: rgba(0, 0, 0, 0.719);
+  position: relative;
+  scroll-margin-top: 100px; /* adjust to your navbar height */
   scroll-margin-top: -90px;
 }
 
@@ -22,7 +23,6 @@
   margin-top: 10px;
   color: #fff;
 }
-
 .service_box {
   width: 80%;
   margin: auto;
