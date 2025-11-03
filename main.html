@@ -7,8 +7,8 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="about.css">
   <link rel="stylesheet" href="services.css">
-  <link rel="stylesheet" href="portfolio.css">
   <link rel="stylesheet" href="reviews.css">
   <link rel="stylesheet" href="shop.css">
   <link rel="stylesheet" href="contact.css">
@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+   rel="stylesheet">
 
 </head>
 <body>
@@ -36,12 +37,12 @@
       </label>
       <ul class="nav-links" id="nav-links">
         <li><a href="#banner">Home</a></li>
-        <li><a href="#Services">Services</a></li>
-        <li><a href="#Portfolio">Portfolio</a></li>
-        <li><a href="#Reviews">Reviews</a></li>
-        <li><a href="#Shop">Shop</a></li>
-        <li><a href="#Contact">Contact</a></li>
-        <li><a href="#Profile">Profile</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services-section">Services</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#profile">Profile</a></li>
       </ul>
     </nav>
 
@@ -61,51 +62,99 @@
   </section>
 
 
-  <!-- ====== SERVICES SECTION ====== -->
-  <section id="Services">
-    <div class="title-text">
-      <p>OUR EXPERTISE</p>
-      <h1>Why Choose Us</h1>
-    </div>
+<!-- ====== ABOUT SECTION ====== -->
+<section id="about">
+  <div class="about-title">
+    <p>About Us</p>
+    <h1>Who We Are</h1>
+  </div>
 
-    <div class="service_box">
-      <div class="services">
-        <h1>Experienced Staff</h1>
-        <div class="service-desc">
-          <div class="service-icon">
-            <i class="fa fa-shield"></i>
-          </div>
-          <div class="service-text">
-            <p>Our expert stylists create looks that make you feel amazing — from daily cuts to special occasions.</p>
-          </div>
+  <div class="about-container">
+    <div class="about-content">
+      <h2>Our Story</h2>
+      <div class="about-desc">
+        <div class="about-icon">
+          <i class="fa fa-users"></i>
         </div>
-
-        <h1>Pre Booking Online</h1>
-        <div class="service-desc">
-          <div class="service-icon">
-            <i class="fa fa-check-square"></i>
-          </div>
-          <div class="service-text">
-            <p>Choose your stylist and preferred time with our easy online booking system.</p>
-          </div>
-        </div>
-
-        <h1>Affordable Cost</h1>
-        <div class="service-desc">
-          <div class="service-icon">
-            <i class="fa fa-gbp"></i>
-          </div>
-          <div class="service-text">
-            <p>High-quality services at budget-friendly prices — style and value in one place.</p>
-          </div>
+        <div class="about-text">
+          <p>We are a passionate team dedicated to delivering exceptional experiences and top-quality service to every client.</p>
         </div>
       </div>
 
-      <div class="services_img">
-        <img src="images/servises1.jpg" alt="Service Image">
+      <h2>Our Mission</h2>
+      <div class="about-desc">
+        <div class="about-icon">
+          <i class="fa fa-bullseye"></i>
+        </div>
+        <div class="about-text">
+          <p>Our goal is to combine creativity, comfort, and care — helping you look and feel your best.</p>
+        </div>
+      </div>
+
+      <h2>Our Values</h2>
+      <div class="about-desc">
+        <div class="about-icon">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="about-text">
+          <p>We believe in trust, respect, and excellence — always putting our clients first.</p>
+        </div>
       </div>
     </div>
-  </section>
+
+    <div class="about-image">
+      <img src="images/about.jpg" alt="About Us Image">
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ====== SERVICES SECTION ====== -->
+<section id="services-section">
+  <div class="services-header">
+    <h1>Our Services</h1>
+    <p>Select a category to explore our full range of professional services</p>
+  </div>
+
+  <!-- CATEGORY NAVIGATION -->
+  <div class="category-nav">
+    <button class="scroll-btn left" id="scrollLeft" aria-label="Scroll left">&#10094;</button>
+
+    <div class="categories">
+      <button class="category active" data-category="Featured">Featured</button>
+      <button class="category" data-category="Training">Training</button>
+      <button class="category" data-category="Extras">Extras</button>
+      <button class="category" data-category="Locs">Locs</button>
+      <button class="category" data-category="Kids">Kids (4–11)</button>
+      <button class="category" data-category="Natural Hair">Natural Hair</button>
+      <button class="category" data-category="Cornrows">Cornrows</button>
+      <button class="category" data-category="Box Braids">Box Braids</button>
+      <button class="category" data-category="Knotless Braids">Knotless Braids</button>
+      <button class="category" data-category="Fulani Braids">Fulani Braids</button>
+      <button class="category" data-category="Crochet">Crochet</button>
+      <button class="category" data-category="Wig">Wig</button>
+      <button class="category" data-category="Weave">Weave</button>
+      <button class="category" data-category="Hair & Styling">Hair & Styling</button>
+    </div>
+
+    <button class="scroll-btn right" id="scrollRight" aria-label="Scroll right">&#10095;</button>
+  </div>
+
+  <!-- SEARCH BAR -->
+  <div class="search-bar">
+    <input type="text" id="serviceSearch" placeholder="Search for a service or category..." />
+  </div>
+
+  <!-- CENTERED SERVICE GRID -->
+  <div class="service-container-wrapper">
+    <div id="service-container"></div>
+  </div>
+</section>
+<!-- ====== END SERVICES SECTION ====== -->
+
+
 
 
 
@@ -115,6 +164,7 @@
   </footer>
 
 <!-- JavaScript -->
+ <script src="services.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

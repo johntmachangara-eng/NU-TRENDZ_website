@@ -20,3 +20,14 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 // Smooth scrolling for anchor links
+
+
+
+
+
+
+
+
+
+
+
